@@ -1,0 +1,411 @@
+﻿{
+  "Version": 1,
+  "LockWindow": false,
+  "DefaultFileName": "UntitledMacro",
+  "DefaultFileExtension": ".txt",
+  "Files": [],
+  "RootFolder": {
+    "Name": "/",
+    "Children": [
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "Turnip Time",
+        "Gist": "",
+        "Contents": "yield(\"/target Summoning Bell\")\nyield(\"/facetarget\")\nyield(\"/vnav movetarget\")\nyield(\"/wait 5\")\nyield(\"/interact\")\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoGrabProfile",
+        "Gist": "",
+        "Contents": "\nif IsAddonVisible(\"CharacterProfile\") then\n  local nT = GetNodeText(\"CharacterProfile\", 16)\n\n  if nT then\n    yield(\"/.emo sndprofilerace \" .. tostring(nT))\n  end\n  yield(\"/wait 2\")\n  nT = GetNodeText(\"CharacterProfile\", 2)\n  if nT then\n    yield(\"/.emo sndprofileguardian \" .. tostring(nT))\n  end\n  yield(\"/wait 2\")\n  nT = GetNodeText(\"CharacterProfile\", 7)\n  if nT then\n    yield(\"/.emo sndprofilenameday \" .. tostring(nT))\n  end\n  yield(\"/wait 2\")\n  nT = GetNodeText(\"CharacterProfile\", 11)\n  if nT then\n    yield(\"/.emo sndprofilecity \" .. tostring(nT))\n  end\n  yield(\"/wait 2\")\n  nT = GetNodeText(\"CharacterProfile\", 25,1)\n  if nT then\n    yield(\"/.emo sndprofilerank \" .. tostring(nT))\n  end\n  yield(\"/wait 2\")\n  yield(\"/.emo sndprofilecomplete\")\nelse\n  yield(\"/.emo sndprofileerror\")\nend\n\n\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "Nicci-Dancer-Strip-A",
+        "Gist": "",
+        "Contents": "yield(\"/sweat motion\")\nyield(\"/wait",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "SetupStripScripA",
+        "Gist": "",
+        "Contents": "--[[\r\n    Name: Emote Engine A\r\n    Description: Scripted emote generator.\r\n    Author: Nicci M\r\n    Version: ----\r\n    Needed Plugins: vnavmesh, Pandora\r\n    Needed Plugin Settings: ----\r\n\r\n    <Usage>\r\n    1. Change settings as wanted\r\n    2. Run script in lua\r\n    3. Find gathering nodes when starting or when prompted\r\n    4. Script will register found nodes and go back to them after visiting all of them once\r\n\r\n\r\n--]]\r\n\r\n--it's a stripper script for Nicci\r\n\r\n--[EMOTE] = {name, min duration, favour}\r\n--emote_list = {\r\n\t--[\"beesknees\"] = {\"dance\", 9}\r\n\r\n--}\r\n\r\nemote = 1\r\naction = 2\r\nmove = 3\r\nequip = 4\r\nuseitem = 5\r\ngaction = 6\r\ngearset = 7\r\nchat = 8\r\npaction = 9\r\nspemote = 10\r\nsetequip = 11\r\ngearsetsave = 12\r\nfacewear = 13\r\n\r\nDNC = 38\r\n\r\nhead = 1\r\ntop = 2\r\ngloves = 3\r\nbottoms = 4\r\nfeet = 5\r\nears = 6\r\nneck = 7\r\nwrist = 8\r\nring = 9\r\nweapon = 10\r\nacc = 11\r\n\r\n--action ids\r\nwindmill = 15993\r\nimprovisation = 16014\r\nimprovisedfinish = 25789\r\n\r\nsets = {\r\n\t[DNC] = {\r\n\t\t[head] = 42907,\r\n\t\t[top] = 42908,\r\n\t\t[gloves] = 42909,\r\n\t\t[bottoms] = 42910,\r\n\t\t[feet] = 42911,\r\n\t\t[ears] = 42755,\r\n\t\t[neck] = 42760,\r\n\t\t[wrist] = 42765,\r\n\t\t[ring] = 42944, --will equip to right hand only\r\n\t}\r\n}\r\n\r\nroutine = {\r\n\t[1] = {\"snap\", 1, emote, true},\r\n\t[2] = {\"gs change\", 5, gearset,\"Dancer I\"},\r\n\t[3] = {\"equip\", 1, equip, 9295}, --ring \r\n\t[4] = {\"facewear\", 2, facewear, '\"Red Spectacles\"'},\r\n\t[6] = {\"gs save\", 5, gearsetsave, \"PerformA\"},\r\n\t[7] = {\"equip\", 1, equip, 32794}, --skyworker singlet\r\n\t[8] = {\"gs save\", 5, gearsetsave, \"PerformB\"},\r\n\t[9] = {\"equip\", 1, equip, 10034}, --gloves\r\n\t[10] = {\"gs save\", 5, gearsetsave, \"PerformC\"},\r\n\t[11] = {\"equip\", 1, equip, 10036}, --shoes\r\n\t[12] = {\"gs save\", 5, gearsetsave, \"PerformD\"},\r\n\t[13] = {\"equip\", 1, equip, 36835}, --bottoms\r\n\t[14] = {\"gs save\", 5, gearsetsave, \"PerformE\"},\r\n\t[15] = {\"equip\", 1, equip, 10033}, --top\r\n\t[16] = {\"gs save\", 5, gearsetsave, \"PerformF\"},\r\n\t[20] = {\"snap\", 1, emote, true},\r\n\t[21] = {\"gs change\", 2, gearset,\"Dancer I\"},\r\n}\r\n\r\nfunction shiftWord(text, wordTransformer)\r\n\tif type(text) ~= \"string\" then text = tostring(text) end\r\n\tlocal word, rest = text:match(\"([%w-]+)(.*)\")\r\n\tword = (word or \"\"):match(\"^%s*(.-)%s*$\")\r\n\trest = (rest or \"\"):match(\"^%s*(.-)%s*$\")\r\n\tif type(wordTransformer) == \"function\" then word = wordTransformer(word) end\r\n\treturn word, rest\r\nend\r\n\r\nfunction DoEmote(args)\r\n\tslsh, wait, mode, silent = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\tif silent then\r\n\t\tyield(\"/\"..slsh..\" motion\")\r\n\telse\r\n\t\tyield(\"/\"..slsh)\r\n\tend\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction DoAction(args)\r\n\tslsh, wait = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\tyield(\"/ac \"..slsh)\r\n\t--ExecuteAction(slsh)\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction Equip(args)\r\n\tslsh, wait, mode, id = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\tyield(\"/equip \"..tostring(id))\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction Facewear(args)\r\n\tslsh, wait, mode, item = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\tyield(\"/facewear \"..item)\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction SetEquip(args)\r\n\tslsh, wait, mode, class, slot = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\titem = sets[class][slot]\r\n\tyield(\"/equip \"..item)\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction UseItem(args)\r\n\tslsh, wait, mode, set = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\tyield(\"/useitem \"..id)\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction ChangeGearset(args)\r\n\tslsh, wait, mode, set = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\tyield(\"/gs change \\\"\"..set..\"\\\"\")\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction SaveGearset(args)\r\n\tslsh, wait, mode, set = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\tyield(\"/gs save \\\"\"..set..\"\\\"\")\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction DoSpecial(args)\r\n\tslsh, wait, mode, emote = table.unpack(args)\r\n\tyield(\"/echo special\")\r\n\tyield(\"/em \"..slsh)\r\n\tif emote then\r\n\t\tyield(\"/\"..emote..\" motion\")\r\n\tend\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction RunRoutine(list)\r\n\tfor k,v in pairs(list) do\r\n\t\t--yield(\"/echo \"..tostring(k))\r\n\t\tmode = v[3]\r\n\t\t--yield(\"/echo \"..tostring(tmp))\r\n\t\tif mode == emote then\r\n\t\t\tDoEmote(v)\r\n\t\telseif mode == action then\r\n\t\t\tDoAction(v)\r\n\t\telseif mode == 3 then\r\n\t\t\r\n\t\telseif mode == equip then\r\n\t\t\tEquip(v)\r\n\t\telseif mode == useitem then\r\n\t\t\tUseItem(v)\t\t\r\n\t\telseif mode == 6 then\r\n\t\t\r\n\t\telseif mode == gearset then\r\n\t\t\tChangeGearset(v)\r\n\t\telseif mode == spemote then\r\n\t\t\tDoSpecial(v)\r\n\t\telseif mode == setequip then\r\n\t\t\tSetEquip(v)\r\n\t\telseif mode == gearsetsave then\r\n\t\t\tSaveGearset(v)\r\n\t\telseif mode == facewear then\r\n\t\t\tFacewear(v)\r\n\t\tend\r\n\tend\r\n\t\r\n\t\r\nend\r\n\r\nRunRoutine(routine)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "StripScripA",
+        "Gist": "",
+        "Contents": "--[[\r\n    Name: Emote Engine A\r\n    Description: Scripted emote generator.\r\n    Author: Nicci M\r\n    Version: ----\r\n    Needed Plugins: vnavmesh, Pandora\r\n    Needed Plugin Settings: ----\r\n\r\n    <Usage>\r\n    1. Change settings as wanted\r\n    2. Run script in lua\r\n    3. Find gathering nodes when starting or when prompted\r\n    4. Script will register found nodes and go back to them after visiting all of them once\r\n\r\n\r\n--]]\r\n\r\n--it's a stripper script for Nicci\r\n\r\n--[EMOTE] = {name, min duration, favour}\r\n--emote_list = {\r\n\t--[\"beesknees\"] = {\"dance\", 9}\r\n\r\n--}\r\n\r\nemote = 1\r\naction = 2\r\nmove = 3\r\nequip = 4\r\nuseitem = 5\r\ngaction = 6\r\ngearset = 7\r\nchat = 8\r\npaction = 9\r\nspemote = 10\r\nsetequip = 11\r\ngearsetsave = 12\r\nfacewear = 13\r\nmacro = 14\r\n\r\nDNC = 38\r\n\r\nhead = 1\r\ntop = 2\r\ngloves = 3\r\nbottoms = 4\r\nfeet = 5\r\nears = 6\r\nneck = 7\r\nwrist = 8\r\nring = 9\r\nweapon = 10\r\nacc = 11\r\n\r\n--action ids\r\nwindmill = 15993\r\nimprovisation = 16014\r\nimprovisedfinish = 25789\r\n\r\nsets = {\r\n\t[DNC] = {\r\n\t\t[head] = 42907,\r\n\t\t[top] = 42908,\r\n\t\t[gloves] = 42909,\r\n\t\t[bottoms] = 42910,\r\n\t\t[feet] = 42911,\r\n\t\t[ears] = 42755,\r\n\t\t[neck] = 42760,\r\n\t\t[wrist] = 42765,\r\n\t\t[ring] = 42944, --will equip to right hand only\r\n\t}\r\n}\r\n\r\nsetup_routine = {\r\n\t[1] = {\"snap\", 1, emote, true},\r\n\t[2] = {\"gs change\", 5, gearset,\"Dancer I\"},\r\n\t[3] = {\"equip\", 1, equip, 9295}, --ring \r\n\t[4] = {\"facewear\", 2, facewear, '\"Red Spectacles\"'},\r\n\t[6] = {\"gs save\", 5, gearsetsave, \"PerformA\"},\r\n\t[7] = {\"equip\", 1, equip, 32794}, --skyworker singlet\r\n\t[8] = {\"gs save\", 5, gearsetsave, \"PerformB\"},\r\n\t[9] = {\"equip\", 1, equip, 10034}, --gloves\r\n\t[10] = {\"gs save\", 5, gearsetsave, \"PerformC\"},\r\n\t[11] = {\"equip\", 1, equip, 10036}, --shoes\r\n\t[12] = {\"gs save\", 5, gearsetsave, \"PerformD\"},\r\n\t[13] = {\"equip\", 1, equip, 36835}, --bottoms\r\n\t[14] = {\"gs save\", 5, gearsetsave, \"PerformE\"},\r\n\t[15] = {\"equip\", 1, equip, 10033}, --top\r\n\t[16] = {\"gs save\", 5, gearsetsave, \"PerformF\"},\r\n\t[20] = {\"snap\", 1, emote, true},\r\n\t[21] = {\"gs change\", 2, gearset,\"Dancer I\"},\r\n}\r\n\r\nroutine = {\r\n\t[1] = {\"snap\", 1, emote, true},\r\n\t[2] = {\"gs change\", 5, gearset,\"Dancer I\"},\r\n\t[3] = {\"read\", 15, emote, true},\r\n\t[4] = {\"tomestone\", 15, emote, true},\r\n\t[5] = {\"Windmill\", 2.75, action},\r\n\t[6] = {\"gs change\", 3, gearset, \"PerformA\"},\r\n\t--[7] = {\"'s fly off her face and land in the bushes.\", 3.25, spemote, false}, --this boogers it up for some reason >.<\r\n\t--[7] = {\"'s fly off her face and land in the bushes.\", 3.25, spemote, \"amazed\"},\r\n\t--[7] = {\"send\", 1, spemote, 11, false},\r\n\t[8] = {\"bow\", 6.5, emote, true},\r\n\t[9] = {\"sweat\", 9, emote, true},\r\n\t[10] = {\"think\", 6.0, emote, true},\r\n\t[11] = {\"Windmill\", 2.75, action},\r\n\t[12] = {\"gs change\", 3, gearset, \"PerformB\"},\r\n\t[13] = {\"apple\", 9, emote, true},\r\n\t[14] = {\"lophop\", 12, emote, true},\r\n\t[15] = {\"backflip\", 6, emote, true},\r\n\t[16] = {\"sweat\", 6, emote, true},\r\n\t--[16] = {\" is looking very hot.\", 2, spemote, false},\r\n\t[17] = {\"think\", 6, emote, true},\r\n\t[18] = {\"eureka\", 3, emote, true},\r\n\t[19] = {\"Improvisation\", 2.25, action},\r\n\t[20] = {\"gs change\", 3, gearset, \"PerformC\"},\r\n\t[21] = {\"gs change\", 3, gearset, \"PerformD\"},\r\n\t[22] = {\"gs change\", 3, gearset, \"PerformE\"},\r\n\t[23] = {\"gs change\", 3, gearset, \"PerformF\"},\r\n\t[24] = {\"Improvisation\", 5.50, action},\r\n\t[25] = {\"stagger\", 5.5, emote, true},\r\n\t[26] = {\"panic\", 7, emote, true},\r\n\t[27] = {\"shrug\", 14, emote, true},\r\n\t[28] = {\"shiver\", 15, emote, true},\r\n\t[29] = {\"think\", 6, emote, true},\r\n\t[30] = {\"Windmill\", 2.75, action},\r\n\t[31] = {\"gs change\", 2.25, gearset, \"PerformE\"},\r\n\t[32] = {\"Windmill\", 2.75, action},\r\n\t[33] = {\"gs change\", 2.25, gearset, \"PerformD\"},\r\n\t[34] = {\"Windmill\", 2.75, action},\r\n\t[35] = {\"gs change\", 2.25, gearset, \"PerformC\"},\r\n\t[36] = {\"Windmill\", 2.75, action},\r\n\t[37] = {\"gs change\", 2.25, gearset, \"PerformB\"},\r\n\t[38] = {\"magictrick\", 8.25, emote, true},\r\n\t[39] = {\"gs change\", 2.75, gearset, \"PerformA\"},\r\n\t[40] = {\"clap\", 6, emote, true},\r\n\t[41] = {\"apple\", 9, emote, true},\r\n\t[42] = {\"snap\", 1, emote, true},\r\n\t[43] = {\"gs change\", 2, gearset, \"Dancer I\"},\r\n\t[44] = {\"read\", 12, emote, true},\r\n}\r\n\r\nfunction shiftWord(text, wordTransformer)\r\n\tif type(text) ~= \"string\" then text = tostring(text) end\r\n\tlocal word, rest = text:match(\"([%w-]+)(.*)\")\r\n\tword = (word or \"\"):match(\"^%s*(.-)%s*$\")\r\n\trest = (rest or \"\"):match(\"^%s*(.-)%s*$\")\r\n\tif type(wordTransformer) == \"function\" then word = wordTransformer(word) end\r\n\treturn word, rest\r\nend\r\n\r\nfunction DoEmote(args)\r\n\tslsh, wait, mode, silent = table.unpack(args)\r\n\tyield(\"/echo \"..slsh)\r\n\tif silent then\r\n\t\tyield(\"/\"..slsh..\" motion\")\r\n\telse\r\n\t\tyield(\"/\"..slsh)\r\n\tend\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction DoAction(args)\r\n\tslsh, wait = table.unpack(args)\r\n\t--yield(\"/echo \"..slsh)\r\n\tyield(\"/ac \"..slsh)\r\n\t--ExecuteAction(slsh)\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction Equip(args)\r\n\tslsh, wait, mode, id = table.unpack(args)\r\n\t--yield(\"/echo \"..slsh)\r\n\tyield(\"/equip \"..tostring(id))\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction Facewear(args)\r\n\tslsh, wait, mode, item = table.unpack(args)\r\n\t--yield(\"/echo \"..slsh)\r\n\tyield(\"/facewear \"..item)\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction SetEquip(args)\r\n\tslsh, wait, mode, class, slot = table.unpack(args)\r\n\t--yield(\"/echo \"..slsh)\r\n\titem = sets[class][slot]\r\n\tyield(\"/equip \"..item)\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction UseItem(args)\r\n\tslsh, wait, mode, set = table.unpack(args)\r\n\t--yield(\"/echo \"..slsh)\r\n\tyield(\"/useitem \"..id)\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction ChangeGearset(args)\r\n\tslsh, wait, mode, set = table.unpack(args)\r\n\t--yield(\"/echo \"..slsh)\r\n\tyield(\"/gs change \\\"\"..set..\"\\\"\")\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction SaveGearset(args)\r\n\tslsh, wait, mode, set = table.unpack(args)\r\n\t--yield(\"/echo \"..slsh)\r\n\tyield(\"/gs save \\\"\"..set..\"\\\"\")\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction RunMacro(args)\r\n\tslsh, wait, mode, slot, shared = table.unpack(args)\r\n\tyield(\"/runmacro \"..tostring(slot))\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction DoSpecial(args) -- boogers things up :(\r\n\tslsh, wait, mode, emote = table.unpack(args)\r\n\t--yield(\"/echo special\")\r\n\t--yield(\"/hold ALT+SHIFT\")\r\n\tyield(\"/send MENU+SHIFT+Q\")\r\n\t--yield(\"/release ALT+SHIFT\")\r\n\t--if emote then\r\n\t\t--yield(\"/echo TEST\")\r\n\t\t--yield(\"/\"..emote..\" motion\")\r\n\t--end\r\n\tyield(\"/wait \"..tostring(wait))\r\nend\r\n\r\nfunction RunRoutine(list)\r\n\tfor k,v in pairs(list) do\r\n\t\t--yield(\"/echo \"..tostring(k))\r\n\t\tmode = v[3]\r\n\t\t--yield(\"/echo \"..tostring(tmp))\r\n\t\tif mode == emote then\r\n\t\t\tDoEmote(v)\r\n\t\telseif mode == action then\r\n\t\t\tDoAction(v)\r\n\t\telseif mode == 3 then\r\n\t\t\r\n\t\telseif mode == equip then\r\n\t\t\tEquip(v)\r\n\t\telseif mode == useitem then\r\n\t\t\tUseItem(v)\t\t\r\n\t\telseif mode == 6 then\r\n\t\t\r\n\t\telseif mode == gearset then\r\n\t\t\tChangeGearset(v)\r\n\t\telseif mode == spemote then\r\n\t\t\tDoSpecial(v)\r\n\t\telseif mode == setequip then\r\n\t\t\tSetEquip(v)\r\n\t\telseif mode == gearsetsave then\r\n\t\t\tSaveGearset(v)\r\n\t\telseif mode == facewear then\r\n\t\t\tFacewear(v)\r\n\t\telseif mode == macro then\r\n\t\t\tRunMacro(v)\r\n\t\tend\r\n\tend\r\n\t\r\n\t\r\nend\r\n\r\nRunRoutine(routine)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoGetOutfit",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 0)\n\nfor slot = 0, 13 do\n  slotItem = GetItemIdInSlot(1000, slot)\n  yield(\"/.emo outfitsave \"..tostring(slot)..\" \"..tostring(slotItem))\n  yield(\"/wait 0.25\")\nend\nyield(\"/.emo outfitsave complete\")\n--yield(\"/echo \"..tostring(slot))\n--print(\"test\")",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "Leve Turnin 2",
+        "Gist": "",
+        "Contents": "/target Malihali\n/wait 1.0\n/interact\n/wait 2.5\n/send Numpad2\n/wait 1.0\n/send TAB\n/wait 1.0\n/send TAB\n/wait 0.5\n/send TAB\n/wait 1.0\n/send ESCAPE\n/wait 0.5\n/send ESCAPE\n/target Ponawme\n/wait 1.0\n/send TAB\n/wait 0.5\n/send TAB\n/wait 2.0\n/loop 10\n\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 0
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoEatHelper",
+        "Gist": "",
+        "Contents": "--EatHelper for Emo Script\n\nlocal id = GetClipboard()\nyield(\"/item \" .. tostring(id))\n\n\n\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoGilTracker",
+        "Gist": "",
+        "Contents": "--Tracks gil and other stuff for EmoBot!\n\nlocal gil = GetGil()\nlocal x = 1\nlocal lastCheck = 0\nlocal wf, sitting, emoting, at\n\n--while x do\n  wf = HasStatus(\"Well Fed\")\n  pl = HasStatus(\"Peloton\")\n  sp = HasStatus(\"Sprint\")\n  at = HasStatus(\"Medicated\")\n  --at = HasStatus(\"Increased Spirit Bond Gain\")\n  sitting = GetCharacterCondition(11, true)\n  emoting = GetCharacterCondition(3, true)\n  gil = GetGil()\n  local s = \"/.emo setgil \" .. tostring(gil)\n  yield(s)\n  yield(\"/wait 0.25\")\n \n  if wf then\n    yield(\"/.emo wellfed 1\")\n  else\n    yield(\"/.emo wellfed 0\")\n  end\n  yield(\"/wait 0.25\")\n  \n  if at then\n    yield(\"/.emo aetheric-elixir 1\")\n  else\n    yield(\"/.emo aetheric-elixir -1\")\n  end\n  yield(\"/wait 0.25\")\n  \n  if pl then\n    yield(\"/.emo peloton 1\")\n  else\n    yield(\"/.emo peloton 0\")\n  end\n  yield(\"/wait 0.25\")\n  \n  if sp then\n    yield(\"/.emo sprint 1\")\n  else\nyield(\"/.emo sprint 0\")\n  end\n  yield(\"/wait 0.25\")\n  \n  if sitting then\n    yield(\"/.emo sitting true\")\n  else\n    yield(\"/.emo sitting false\")\n  end\n\n  if emoting then\n    yield(\"/.emo emoting true\")\n  else\n    yield(\"/.emo emoting false\")\n  end",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "Untitled macro",
+        "Gist": "",
+        "Contents": "--local Chat_Log = GetNodeText(\"ChatLogPanel_3\", 7, 2)\r\n--yield(\"/e ChatLog: \" .. tostring(type(Chat_Log)))\r\n\r\n--Chat_Log:gmatch(\"(%a+)\")\r\n\r\nlocal occupied = IsPlayerOccupied()\r\nlocal moving = IsMoving()\r\n\r\n--yield(\"/e ChatLog \" .. type(s))\r\nyield(\"/e Occupied? \" .. tostring(occupied))\r\nyield(\"/e IsMoving? \" .. tostring(moving))\r\n\r\nlocal x = Chat.LastLinkedItemId\r\nyield(\"/e LastItemLinked: \" .. tostring(type(x)))\r\nyield(\"/e LastItemLinkedID: \" .. tostring(x))\r\n\r\nlocal con = GetCharacterCondition(3, true)\r\nyield(\"/e Condition: \" .. tostring(con))",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoIsOccupied",
+        "Gist": "",
+        "Contents": "local occupied = IsPlayerOccupied()\n\nyield(\"/.emo occupied \" .. tostring(occupied))",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 0
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoIsEmoting",
+        "Gist": "",
+        "Contents": "local con = GetCharacterCondition(49, true) -- emoting flag\nyield(\"/e autorun \" .. tostring(con))\n\n\n\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoFlagsMonitor",
+        "Gist": "",
+        "Contents": "local x = 1\r\nlocal con\nlocal val\r\n\r\nfunction bool_to_number(value)\r\n  if value == true then\r\n    return 1\r\n  else\r\n    return 0\r\n  end\r\nend\r\n\r\nlocal flags = {3,4,5,6,7,8,9,10,12,13,14,15,16,25,26,27,\n               28,29,30,31,32,33,34,35,36,37,38,39,40,41,\n               43,45,46,48,49}\n\r\nwhile x do\r\n  con = 0\n  for i, v in ipairs(flags) do\r\n    val = GetCharacterCondition(v, true)\r\n    con = con + bool_to_number(val) * 2^(v\r-1)\n  end\r\n  if con ~= 0 then\r\n\tyield(\"/e is emoting, con = \" .. con .. \".\")\r\n  end\r\n  yield(\"/wait 2.5\")\r\n  \r\nend",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveHat",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 2)\nMoveItemToContainer(slotItem, 1000, 3201)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveTop",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 3)\nMoveItemToContainer(slotItem, 1000, 3202)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveGloves",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 4)\nMoveItemToContainer(slotItem, 1000, 3203)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoSendEscape",
+        "Gist": "",
+        "Contents": "/send Escape",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 0
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoGetPanties",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 6)\nyield(\"/.emo outfitsave \"..tostring(30)..\" \"..tostring(slotItem))\nyield(\"/wait 0.25\")\n\nyield(\"/.emo outfitsave complete\")",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoGetBra",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 3)\nyield(\"/.emo outfitsave \"..tostring(31)..\" \"..tostring(slotItem))\nyield(\"/wait 0.25\")\n\nyield(\"/.emo outfitsave complete\")",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoGetNails",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 4)\nyield(\"/.emo outfitsave \"..tostring(32)..\" \"..tostring(slotItem))\nyield(\"/wait 0.25\")\n\nyield(\"/.emo outfitsave complete\")",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemovePants",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 6)\nMoveItemToContainer(slotItem, 1000, 3205)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemovePanties",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 6)\nif slotItem then\n  if slotItem > 0 then\n    MoveItemToContainer(slotItem, 1000, 3205)\n  end\nend\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveBra",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 3)\nif slotItem then\n  if slotItem > 0 then\n    MoveItemToContainer(slotItem, 1000, 3202)\n  end\nend",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveNails",
+        "Gist": "",
+        "Contents": "",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveShoes",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 7)\nMoveItemToContainer(slotItem, 1000, 3206)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveEarring",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 8)\nMoveItemToContainer(slotItem, 1000, 3207)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveNecklace",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 9)\nMoveItemToContainer(slotItem, 1000, 3208)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveBracelet",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 10)\nMoveItemToContainer(slotItem, 1000, 3209)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveRingR",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 11)\nMoveItemToContainer(slotItem, 1000, 3300)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoRemoveRingL",
+        "Gist": "",
+        "Contents": "local slotItem = GetItemIdInSlot(1000, 12)\nMoveItemToContainer(slotItem, 1000, 3300)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoPortingCheck",
+        "Gist": "",
+        "Contents": "local x = 1\nlocal val1, val2, val3, val4, val5\nlocal casting = 0\nlocal s\nwhile x do\n  val1 = GetCharacterCondition(45, true)\n  val2 = GetCharacterCondition(51, true)\n  val3 = GetCharacterCondition(92, true)\n  val4 = GetCharacterCondition(93, true)\n  val5 = GetCharacterCondition(27, true)\n\n  if (val1 and not val2) or (val3 or val4) then\n    yield(\"/.emo porting 1.5\")\n  end\n  yield(\"/wait 0.25\")\n  while val5 do\n    if (val5) then\n      casting = casting + 0.5\n    elseif casting > 0 then\n      casting = casting - 0.5\n    end\nval5 = GetCharacterCondition(27, true)\nyield(\"/wait 0.15\")\n  end\n  val1 = GetCharacterCondition(45, true)\n  val2 = GetCharacterCondition(51, true)\n  if (val1 and val2 and casting > 0) then\n    s = tostring(casting)\n    yield(\"/.emo porting \" .. s)\n  end\n  yield(\"/wait 0.45\")\n  x = x + 1\n  if x > 7 then\n     yield(\"/.emo PCCallback\")\n    x = nil\n    \n  end\nend\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoStatsTracker",
+        "Gist": "",
+        "Contents": "local x = 1\nlocal val1, val2, val3, val4, val5\nlocal wf, sitting, emoting, at, pl, sp, at\nlocal casting = 0\n\nlocal gil = GetGil()\nlocal s = \"/.emo setgil \" .. tostring(gil)\n\nwhile x do\n  val1 = GetCharacterCondition(45, true)\n  val2 = GetCharacterCondition(51, true)\n  val3 = GetCharacterCondition(92, true)\n  val4 = GetCharacterCondition(93, true)\n  val5 = GetCharacterCondition(27, true)\n  sitting = GetCharacterCondition(11, true)\n  emoting = GetCharacterCondition(3, true)\n  \n  wf = HasStatus(\"Well Fed\")\n  pl = HasStatus(\"Peloton\")\n  sp = HasStatus(\"Sprint\")\n  at = HasStatus(\"Medicated\")\n\n  if (val1 and not val2) or (val3 or val4) then\n    yield(\"/.emo porting 1.5\")\n  end\n  yield(\"/wait 0.25\")\n  while val5 do\n    if (val5) then\n      casting = casting + 0.5\n    elseif casting > 0 then\n      casting = casting - 0.5\n    end\nval5 = GetCharacterCondition(27, true)\nyield(\"/wait 0.15\")\n  end\n  val1 = GetCharacterCondition(45, true)\n  val2 = GetCharacterCondition(51, true)\n  if (val1 and val2 and casting > 0) then\n    s = tostring(casting)\n    yield(\"/.emo porting \" .. s)\n  end\n  yield(\"/wait 0.25\")\n  \n  if wf then\n    yield(\"/.emo wellfed 1\")\n  else\n    yield(\"/.emo wellfed 0\")\n  end\n  yield(\"/wait 0.25\")\n  \n  if at then\n    yield(\"/.emo aetheric-elixir 1\")\n  else\n    yield(\"/.emo aetheric-elixir -1\")\n  end\n  yield(\"/wait 0.25\")\n  \n  if pl then\n    yield(\"/.emo peloton 1\")\n  else\nyield(\"/.emo peloton 0\")\n  end\n  yield(\"/wait 0.25\")\n  \n  if sp then\n    yield(\"/.emo sprint 1\")\n  else\nyield(\"/.emo sprint 0\")\n  end\n  yield(\"/wait 0.25\")\n  \n  if sitting then\n    yield(\"/.emo sitting true\")\n  else\n    yield(\"/.emo sitting false\")\n  end\n\n  if emoting then\n    yield(\"/.emo emoting true\")\n  else\n    yield(\"/.emo emoting false\")\n  end\n  \n  x = x + 1\n  if x > 7 then\nx = nil\n  end\nend\nyield(s)",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoGetFlags",
+        "Gist": "",
+        "Contents": "-- Tests for GetCharacterCondition(n, true)\r\n-- n (bit) -- Status - ~~~~\r\n-- 1 (1) -- NormalConditions\r\n-- 3 (2) -- Emoting\r\n-- 9 (3)  -- CarryingObject\r\n-- 11 (4)  -- InThatPosition - sitting or dozing\r\n-- 27 (5)  -- Casting\r\n-- 36 (6)  -- InDeulingArea\r\n-- 45 (7)  -- BetweenAreas - can be used to determine if porting\r\n-- 46 (8)  -- Stealthed\r\n-- 48 (9)  -- Jumping\r\n-- 49 (10)  -- AutoRunActive\r\n-- 50 (11)  -- OccupiedSummoningBell\r\n-- 51 (12)  -- BetweenAreas51\r\n-- 52 (13)  -- SystemError\r\n-- 53 (14)  -- LoggingOut\r\n-- 54 (15)  -- ConditionLocation\r\n-- 65 (16)  -- Carrying Item\r\n-- 68 (17)  -- Transformed\r\n-- 70 (18)  -- BeingMoved\r\n-- 77 (19)  -- InFlight\r\n-- 90 (20)  -- RolePlaying\r\n-- 92 (21)  -- ReadyingVisitOtherWorld\r\n-- 93 (22)  -- WaitingToVisitOtherWorld\r\n-- 94 (23)  -- UsingParasol\r\n-- 97 (24)  -- Disguised\r\n-- 100 (25)  -- EditingPortrait\r\n\r\nlocal chn = \"ChatLogPanel_0\"\r\nlocal gil, lastGil = 0,0\r\nlocal x = 1\r\nlocal val1 = 0\r\nlocal val2 = 0\r\nlocal kill = nil\r\nlocal tests = {1,3,9,11,27,36,45,46,48,49,50,51,52,53,54,65,68,70,77,90,92,93,94,97,100}\r\nlocal statChecks = {\"Well Fed\", \"Sprint\", \"Peloton\", \"Medicated\"}\r\nlocal s, cS, lS, cnt, lCnt, cX, lX\r\n\r\nlS = \"\"\r\nlCnt = 0\r\n\r\nwhile x do\r\n  val1 = 0\r\n  val2 = 0\r\n  for i = 1, #tests do\r\n    if GetCharacterCondition(tests[i], true) then\r\n      val1 = val1 + 2^(i-1)\r\n      if tests[i] == 53 or tests[i] == 46 then\r\n        kill = true\r\n      end\r\n    end\r\n  end\r\n  for i = 1, #statChecks do\r\n    if HasStatus(statChecks[i]) then\r\n      val2 = val2 + 2^(i-1)\r\n    end\r\n  end\r\n  \r\n  yield(\"/.emo flags \" .. tostring(val1))\r\n  yield(\"/wait 0.77\")\r\n  yield(\"/.emo statuschecks \" .. tostring(val2))\r\n  yield(\"/wait 0.77\")\r\n  if kill then\r\n    x = nil\r\n  end\r\n\r\n  cS = GetNodeText(chn, 7, 2)\r\n\r\n  gil = GetGil()\r\n  if gil ~= lastGil then\r\n    s = \"/.emo setgil \" .. tostring(gil)\r\n    yield(s)\r\n    yield(\"/wait 0.77\")\r\n  end\r\n  lastGil = gil\r\n  \r\n  if type(cS) == \"string\" then\r\n    cS = cS:gsub(\"\\r?\\n\", \" \")\r\n\tif lS ~= cS then\r\n\t  lX = {}\r\n\t  cnt = 0\r\n\t  for line in lS:gmatch(\"([^\\r\\n]*)[\\r\\n]\") do\r\n\t\tcnt = cnt + 1\r\n\t\tlX[cnt] = line\r\n\t  end\r\n\t  cX = {}\r\n\t  cnt = 0\r\n\t  for line in cS:gmatch(\"([^\\r\\n]*)[\\r\\n]\") do\r\n\t\tcnt = cnt + 1\r\n\t\tcX[cnt] = line\r\n\t  end\r\n\t  lCnt = #cX\r\n\t  cnt = #cX\r\n\t  s = nil\r\n\t  \r\n      yield(\"/wait 0.33\")\r\n\r\n\t  while not s and (#cX > 4 and #lX > 4) do\r\n\t\tif cX[cnt - 1] == lX[#lX] and cX[cnt - 2] == lX[#lX - 1] and cX[cnt - 3] == lX[#lX - 2] then\r\n\t\t  s = true\r\n\t\t  lCnt = cnt\r\n\t\tend\r\n\t\tcnt = cnt - 1\r\n\t\tif cnt < 1 then\r\n\t\t\ts = \"exit\"\r\n\t\tend\r\n\t  end\r\n\t  \r\n\t  if s == \"exit\" then\r\n\t\ts = nil\r\n\t  end\r\n\t  \r\n\t  \r\n\t  --yield(\"/e \" .. tostring(lCnt))\r\n\t  --yield(\"/wait 0.345\")\r\n\t  --yield(\"/e #lX\" .. tostring(#lX))\r\n\t  --yield(\"/wait 0.345\")\r\n\t  --yield(\"/e #cX\" .. tostring(#cX))\r\n\t  --yield(\"/wait 0.345\")\r\n\t  if s then\r\n\t    cnt = 0\r\n\t    for i=lCnt, #cX do\r\n          if string.find(cX[i], \"%[WoLua%]%[emo%]\") or string.find(cX[i], \"The command /.emo\") then --\r\n            x = nil\r\n            yield(\"/e SND-EMO-Handler .. Error Detected .. Shutting Down...\")\r\n            yield(\"/wait 0.234\")\r\n            break\n\r\n          end\r\n\t\t  if cX[i] then\r\n\t\t    yield(\"/.emo sndchatlog|^|\" .. tostring(cX[i]))\r\n\t\t    yield(\"/wait 0.234\")\r\n\t\t  end\r\n\t    end\r\n\t  end\r\n\t  lS = cS\r\n\t  cnt = cnt + 1\r\n    end\r\n  end\r\nend\r\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoMoveNTurn180",
+        "Gist": "",
+        "Contents": "yield(\"/wait 1.27\")\nyield(\"/hold S\")\nyield(\"/wait 0.27\")\nyield(\"/release S\")\nyield(\"/hold D\")\nfor i=1, 7 do\nyield(\"/wait 0.175\")\nend\nyield(\"/release D\")\nyield(\"/wait 0.17\")\n",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoSaveLog",
+        "Gist": "",
+        "Contents": "local data = GetClipboard()\nlocal folder = \"C:/WoLua/emo/\" -- Set to Emobot's installation directory\nlocal datestring = os.date(\"%m-%d-%Y_%H.%M.%S\", os.time())\nyield(\"/e EmoBot Saved dbg_log_\" .. datestring .. \" to \" .. folder)\n--datestring = \"123\"\nlocal filename = folder .. \"dbg-log_\" .. datestring .. \".txt\"\nlocal file = io.open(filename, \"w\")\nfile:write(data)\nfile:close()",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoBackupData",
+        "Gist": "",
+        "Contents": "local data = GetClipboard()\nlocal folder = \"C:/WoLua/emo/\" -- Set to Emobot's installation directory\n--local datestring = os.date(\"%m-%d-%Y_%H.%M.%S\", os.time())\nyield(\"/e EmoBot UserData Backup Complete! ~ \" .. \" Saved to ~ \" .. folder)\n--datestring = \"123\"\nlocal filename = folder .. \"EmobotBackup\" .. \".json\"\nlocal file = io.open(filename, \"w\")\nfile:write(data)\nfile:close()",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      },
+      {
+        "$type": "SomethingNeedDoing.MacroNode, SomethingNeedDoing",
+        "Name": "EmoEquipFromClip",
+        "Gist": "",
+        "Contents": "local data = GetClipboard()\nn = tonumber(data)\nif math.floor(n) == n then\n  yield(\"/.emo snd-equiphandler InvalidSlot\")\nelse\n\n  local slot = n - math.floor(n)\n  local item = math.floor(n)\n  local x = 0\n  \n  if item < 1 then\n    yield(\"/.emo snd-equiphandler InvalidItemId\")\n  else\n    yield(\"/equipitem \" .. tostring(item))\nyield(\"/wait 0.5\")\nlocal x = GetItemIdInSlot(1000, slot)\nif x then\n      if x == item then\n        --yield(\"/.emo snd-equiphandler Success!\")\n  else\n    --yield(\"/.emo snd-equiphandler Fail!\")\n      end\nelse\n  --yield(\"/.emo snd-equiphandlerr Fail!\")\nend\n  end\nend\n\n\n\n--yield(\"/e Emo Test!\")\n\n\nyield(\"/wait 3\")",
+        "CraftingLoop": false,
+        "IsPostProcess": false,
+        "CraftLoopCount": 0,
+        "Language": 2
+      }
+    ]
+  },
+  "CraftSkip": true,
+  "SmartWait": false,
+  "QualitySkip": true,
+  "LoopTotal": false,
+  "LoopEcho": false,
+  "DisableMonospaced": false,
+  "UseCraftLoopTemplate": false,
+  "CraftLoopTemplate": "/craft {{count}}\n/waitaddon \"RecipeNote\" <maxwait.5>/click \"RecipeNote_Synthesize\"/waitaddon \"Synthesis\" <maxwait.5>{{macro}}/loop",
+  "CraftLoopFromRecipeNote": true,
+  "CraftLoopMaxWait": 5,
+  "CraftLoopEcho": false,
+  "MaxTimeoutRetries": 3,
+  "NoisyErrors": false,
+  "BeepFrequency": 900,
+  "BeepDuration": 250,
+  "BeepCount": 3,
+  "UseSNDTargeting": true,
+  "ARCharacterPostProcessMacro": null,
+  "ARCharacterPostProcessExcludedCharacters": [],
+  "StopMacroIfActionTimeout": false,
+  "StopMacroIfItemNotFound": false,
+  "StopMacroIfCantUseItem": false,
+  "StopMacroIfTargetNotFound": false,
+  "StopMacroIfAddonNotFound": false,
+  "StopMacroIfAddonNotVisible": false,
+  "ChatType": 58,
+  "ErrorChatType": 2,
+  "LuaRequirePaths": [],
+  "UseMacroFileSystem": false
+}
