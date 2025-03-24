@@ -74,8 +74,6 @@ local matchMadness = {
 	
 }
 
-
-
 local strings = {
 	["Yojimbo, come on down!"] = "magictrick",
 	["ahoy"] = "laliho",
