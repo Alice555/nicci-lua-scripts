@@ -140,56 +140,6 @@ local phrasher = {
 		[4] = "♪What is a man deep down inside?<w.2>♪",
 		[5] = "♪But a raging beast, with nothing to hide<w.2>♪",
 	},
-	["playing in the band"] = {
-		[1] = "♪Some folks trust to reason<w.2>♪",
-		[2] = "♪Others trust to might<w.2>♪",
-		[3] = "♪I don't trust to nothing<w.2>♪",
-		[4] = "♪But I know it come out right<w.2>♪",
-
-		[5] = "♪Say it once again now<w.2>♪",
-		[6] = "♪Oh I hope you understand<w.2>♪",
-		[7] = "♪When it's done and over<w.2>♪",
-		[8] = "♪Lord, a man is just a man<w.2>♪",
-
-		[9] = "♪Playing<w.2>♪",
-		[10] = "♪Playing in the band<w.2>♪",
-		[11] = "♪Daybreak<w.2>♪",
-		[12] = "♪Daybreak on the land<w.2>♪",
-
-		[13] = "♪Some folks look for answers<w.2>♪",
-		[14] = "♪Others look for fights<w.2>♪",
-		[15] = "♪Some folks up in treetops<w.2>♪",
-		[16] = "♪Just look to see the sights<w.2>♪",
-
-		[17] = "♪I can tell your future<w.2>♪",
-		[18] = "♪Look what's in your hand<w.2>♪",
-		[19] = "♪But I can't stop for nothing<w.2>♪",
-		[20] = "♪I'm just playing in the band<w.2>♪",
-
-		[21] = "♪Playing<w.2>♪",
-		[22] = "♪Playing in the band<w.2>♪",
-		[23] = "♪Daybreak<w.2>♪",
-		[24] = "♪Daybreak on the land<w.2>♪",
-
-		[25] = "♪Standing on a tower<w.2>♪",
-		[26] = "♪World at my command<w.2>♪",
-		[27] = "♪You just keep a turning<w.2>♪",
-		[28] = "♪While I'm playing in the band<w.2>♪",
-
-		[29] = "♪If a man among you<w.2>♪",
-		[30] = "♪Got no sin upon his hand<w.2>♪",
-		[31] = "♪Let him cast a stone at me<w.2>♪",
-		[32] = "♪For playing in the band<w.2>♪",
-
-		[33] = "♪Playing<w.2>♪",
-		[34] = "♪Playing in the band<w.2>♪",
-		[35] = "♪Daybreak<w.2>♪",
-		[36] = "♪Daybreak on the land<w.2>♪",
-		[37] = "♪Playing<w.2>♪",
-		[38] = "♪Playing in the band<w.2>♪",
-		[39] = "♪Daybreak Daybreak on the land<w.2>♪",
-		[40] = "Playing in the Band - Grateful Dead",
-	},
 	["kittytoes"] = {
 		[1] = "         ／l、         Clap<wait.1.5>",
 		[2] = "        (°､ 。７つ,    Them",
